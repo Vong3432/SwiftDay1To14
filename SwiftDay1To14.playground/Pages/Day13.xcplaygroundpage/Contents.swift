@@ -98,7 +98,7 @@ extension String {
     
     // return trimmed string
     func trimmed() -> String {
-        self.trimmingCharacters(in: .whitespacesAndNewlines)
+        trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     // direct change string with trim
@@ -108,7 +108,7 @@ extension String {
     
     // computed
     var lines: [String] {
-        self.components(separatedBy: .newlines)
+        components(separatedBy: .newlines)
     }
 }
 
@@ -273,3 +273,51 @@ let office = Office(rooms: 30, cost: 10000, agent: "Joseph")
 house.printSalesSummary()
 office.printSalesSummary()
 
+
+protocol Anime {
+    var availableLanguages: [String] { get set }
+    func watch(in language: String)
+}
+extension Anime {
+    func watch(in language: String) {
+        if availableLanguages.contains(language) {
+            print("Now playing in \(language)")
+        } else {
+            print("Unrecognized language.")
+        }
+    }
+}
+
+struct OnePunchMan: Anime {
+    var availableLanguages: [String]
+}
+
+let onePunchManAnime = OnePunchMan(availableLanguages: ["en", "cn"])
+onePunchManAnime.watch(in: "thai")
+
+
+protocol SuperHeroMovie {
+    func writeScript() -> String
+}
+extension SuperHeroMovie {
+    func makeScript() -> String {
+        return """
+        Lots of special effects,
+        some half-baked jokes,
+        and a hint of another
+        sequel at the end.
+        """
+    }
+}
+
+struct SuperMan: SuperHeroMovie {
+    func writeScript() -> String {
+        return """
+        Writing more script
+        """
+    }
+}
+
+let supermanMovie = SuperMan()
+supermanMovie.writeScript()
+supermanMovie.makeScript()
